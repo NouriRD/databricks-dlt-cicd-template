@@ -8,12 +8,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - uses: databricks/databricks-cli-action@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          host: ${{ secrets.DATABRICKS_HOST }}
-          token: ${{ secrets.DATABRICKS_TOKEN }}
+          python-version: '3.10'
+
+      - name: Install Databricks CLI
+        run: pip install databricks-cli
 
       - name: Deploy Databricks Bundle
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: databricks bundle deploy -t dev

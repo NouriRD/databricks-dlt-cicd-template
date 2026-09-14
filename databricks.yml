@@ -3,6 +3,8 @@ bundle:
 
 targets:
   dev:
+    workspace:
+      root_path: /Workspace/Users/your_email@xxx.com/databricks-dlt-cicd-template
     mode: development
     default: true
   
@@ -15,6 +17,6 @@ resources:
       name: dlt_pipeline
       libraries:
         - notebook:
-            path: ./notebooks/dlt_pipeline.py
+            path: ./dlt_pipeline
       target: main.default
       continuous: false
