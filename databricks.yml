@@ -1,0 +1,20 @@
+bundle:
+  name: databricks-dlt-cicd-template
+
+targets:
+  dev:
+    mode: development
+    default: true
+  
+  prod:
+    mode: production
+
+resources:
+  pipelines:
+    dlt_pipeline:
+      name: dlt_pipeline
+      libraries:
+        - notebook:
+            path: ./notebooks/dlt_pipeline.py
+      target: main.default
+      continuous: false
