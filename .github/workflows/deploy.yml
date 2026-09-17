@@ -1,26 +1,23 @@
-name: Deploy Databricks Bundle
+name: deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: databricks/setup-cli@main
         with:
-          python-version: '3.10'
+          version: 0.230.0
 
-      - name: Install Databricks CLI
-        run: pip install databricks-cli
-
-      - name: Deploy Databricks Bundle
+      - name: Deploy bundle
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-        run: databricks bundle deploy -t dev
+        run: |
+          databricks --version
+          databricks bundle deploy -t dev --force-lock
