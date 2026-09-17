@@ -10,13 +10,16 @@ targets:
   
   prod:
     mode: production
+    workspace:
+      host: https://your-prod-workspace.cloud.databricks.com
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
 
 resources:
   pipelines:
     dlt_pipeline:
-      name: dlt_pipeline
+      name: dlt_pipeline_${bundle.target}
       libraries:
         - notebook:
-            path: ./dlt_pipeline.py
-      target: main.default
+            path: ./notebooks/dlt_pipeline.py
+      target: main
       continuous: false
