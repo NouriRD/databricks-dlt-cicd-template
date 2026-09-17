@@ -17,6 +17,6 @@ resources:
       name: dlt_pipeline
       libraries:
         - notebook:
-            path: ./dlt_pipeline
+            path: ./dlt_pipeline.py
       target: main.default
       continuous: false
