@@ -19,7 +19,7 @@ resources:
     dlt_pipeline:
       name: dlt_pipeline_${bundle.target}
       libraries:
-        - notebook:
+        - file:
             path: ./notebooks/dlt_pipeline.py
       target: main
       continuous: false
